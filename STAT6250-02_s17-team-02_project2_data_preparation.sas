@@ -120,3 +120,39 @@ https://github.com/stat6250/team-2_project2/blob/set-up/Data/train.csv?raw=true
     &inputDataset3URL.,
     &inputDataset3Type.
 )
+
+
+* sort and check raw datasets for duplicates with respect to their unique ids,
+  removing blank rows, if needed;
+proc sort
+        nodupkey
+        data=macro_raw
+        dupout=macro_raw_dups
+        out=macro_raw_sorted(where=(not(missing(School_Code))))
+    ;
+    by
+        timestamp
+    ;
+run;
+
+proc sort
+        nodupkey
+        data=train_raw
+        dupout=train_raw_dups
+        out=train_raw_sorted
+    ;
+    by
+       id
+    ;
+run;
+proc sort
+        nodupkey
+        data=test_raw
+        dupout=test_raw_dups
+        out=test_raw_sorted
+    ;
+    by
+        id
+    ;
+run;
+
