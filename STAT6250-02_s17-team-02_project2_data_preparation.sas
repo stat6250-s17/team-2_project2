@@ -22,13 +22,13 @@
 
 --
 
-[Dataset 2 Name] Test Housing Data
+[Dataset 2 Name] Housing_Data_2011
 
-[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property. (from July 2015 to May 2016)
+[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property (from 2011)
 
-[Experimental Unit Description] Test data from Sberbank Russian Housing Market
+[Experimental Unit Description] Housing data from Sberbank Russian Housing Market
 
-[Number of Observations] 7662                   
+[Number of Observations] 753                   
 
 [Number of Features] 291
 
@@ -40,41 +40,114 @@
 
 --
 
-[Dataset 3 Name] Train Housing Data
+[Dataset 3 Name] Housing_Data_2012
 
-[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property. (from August 2011 to June 2015)
+[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property (from 2012)
 
-[Experimental Unit Description] Train data from Sberbank Russian Housing Market
+[Experimental Unit Description] Housing data from Sberbank Russian Housing Market
 
-[Number of Observations] 30471                    
+[Number of Observations] 4839                   
 
-[Number of Features] 292
+[Number of Features] 291
 
-[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/train.csv.zip
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
 
 [Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
 
 [Unique ID Schema] The columns "timestamp"
-;
+
+--
+
+[Dataset 4 Name] Housing_Data_2013
+
+[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property (from 2013)
+
+[Experimental Unit Description] Housing data from Sberbank Russian Housing Market
+
+[Number of Observations] 7978                   
+
+[Number of Features] 291
+
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
+
+[Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
+
+[Unique ID Schema] The columns "timestamp"
+
+--
+
+[Dataset 5 Name] Housing_Data_2014
+
+[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property (from 2014)
+
+[Experimental Unit Description] Housing data from Sberbank Russian Housing Market
+
+[Number of Observations] 13662                   
+
+[Number of Features] 291
+
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
+
+[Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
+
+[Unique ID Schema] The columns "timestamp"
+
+--
+
+[Dataset 6 Name] Housing_Data_2015
+
+[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property (from 2015)
+
+[Experimental Unit Description] Housing data from Sberbank Russian Housing Market
+
+[Number of Observations] 3239                   
+
+[Number of Features] 291
+
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
+
+[Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
+
+[Unique ID Schema] The columns "timestamp"
+
+--
 
 * setup environmental parameters;
 %let inputDataset1URL =
-https://github.com/stat6250/team-2_project2/blob/set-up/Data/macro.csv?raw=true
+https://github.com/stat6250/team-2_project2/blob/set-up/Data/macro.xls?raw=true
 ;
 %let inputDataset1Type = XLS;
 %let inputDataset1DSN = macro_raw;
 
 %let inputDataset2URL =
-https://github.com/stat6250/team-2_project2/blob/set-up/Data/test.csv?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/Data/macro.xls?raw=true
 ;
 %let inputDataset2Type = XLS;
-%let inputDataset2DSN = test_raw;
+%let inputDataset2DSN = Housing_Data_2011_raw;
 
 %let inputDataset3URL =
-https://github.com/stat6250/team-2_project2/blob/set-up/Data/train.csv?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2012.xls?raw=true
 ;
 %let inputDataset3Type = XLS;
-%let inputDataset3DSN = train_raw;
+%let inputDataset3DSN = Housing_Data_2012_raw;
+
+%let inputDataset4URL =
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2013.xls?raw=true
+;
+%let inputDataset4Type = XLS;
+%let inputDataset4DSN = Housing_Data_2013_raw;
+
+%let inputDataset5URL =
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2014.xls?raw=true
+;
+%let inputDataset5Type = XLS;
+%let inputDataset5DSN = Housing_Data_2014_raw;
+
+%let inputDataset6URL =
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.xls?raw=true
+;
+%let inputDataset6Type = XLS;
+%let inputDataset6DSN = Housing_Data_2015_raw;
 
 * load raw datasets over the wire, if they doesn't already exist;
 %macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
@@ -119,6 +192,21 @@ https://github.com/stat6250/team-2_project2/blob/set-up/Data/train.csv?raw=true
     &inputDataset3DSN.,
     &inputDataset3URL.,
     &inputDataset3Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset4DSN.,
+    &inputDataset4URL.,
+    &inputDataset4Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset5DSN.,
+    &inputDataset5URL.,
+    &inputDataset5Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset6DSN.,
+    &inputDataset6URL.,
+    &inputDataset6Type.
 )
 
 
