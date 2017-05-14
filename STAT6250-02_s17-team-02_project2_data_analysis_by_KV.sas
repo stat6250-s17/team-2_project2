@@ -5,10 +5,10 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding college-preparation trends at CA public K-12 schools
+questions regarding Russian housing market
 
-Dataset Name: cde_2014_analytic_file created in external file
-STAT6250-02_s17-team-0_project2_data_preparation.sas, which is assumed to be
+Dataset Name: housing_data_analytic_file created in external file
+STAT6250-02_s17-team-2_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
 
 See included file for dataset properties
@@ -21,27 +21,25 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 * load external file that generates analytic dataset cde_2014_analytic_file;
-%include '.\STAT6250-02_s17-team-0_project2_data_preparation.sas';
+%include '.\STAT6250-02_s17-team-0\2_project2_data_preparation.sas';
 
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 *
-Question: What are the top five schools that experienced the biggest increase
-in "Percent (%) Eligible Free (K-12)" between AY2014-15 and AY2015-16?
+Question: Has the price of the house kept increasing or decreasing from 2010 to 
+2016 and at what rate? 
 
-Rationale: This should help identify schools to consider for new outreach based
-upon increasing child-poverty levels.
+Rationale: This should help the investors to see how the housing market behave 
+from 2010 to 2016.
 
-Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
-to the column of the same name from frpm1516.
+Note: This would involve combining housing data from 2011-2015 and taking the 
+average of housing price by monthly or yearly.
 
-Methodology: When combining frpm1415 with frpm1516 during data preparation,
-take the difference of values of "Percent (%) Eligible Free (K-12)" for each
-school and create a new variable called frpm_rate_change_2014_to_2015. Here,
-use proc sort to create a temporary sorted table in descending by
-frpm_rate_change_2014_to_2015 and then proc print to display the first five
+Methodology: Combining Housing_Data_2011 with Housing_Data_2012 to Housing_Data_2015.
+Use proc sort to create a temporary sorted table in descending by
+Housing_Data_2011_2015 and then proc print to display the first five
 rows of the sorted dataset.
 
 Limitations: This methodology does not account for schools with missing data,
@@ -70,29 +68,26 @@ run;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 *
-Question: Can "Percent (%) Eligible FRPM (K-12)" be used to predict the
-proportion of high school graduates earning a combined score of at least 1500
-on the SAT?
+Question: What is the relationship between housing price and GDP?
 
-Rationale: This would help inform whether child-poverty levels are associated
-with college-preparedness rates, providing a strong indicator for the types of
-schools most in need of college-preparation outreach.
+Rationale: This should help the investors understand the picture and the 
+relaionship between GDP and housing price.
 
-Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
-to the column PCTGE1500 from sat15.
+Note: This would involve merging two data sets one from macroeconomics data set
+and housing data set then we can make a table or a graph to see the relationship.
 
-Methodology: Use proc means to compute 5-number summaries of "Percent (%)
-Eligible Free (K-12)" and PCTGE1500. Then use proc format to create formats
-that bin both columns with respect to the proc means output. Then use proc freq
-to create a cross-tab of the two variables with respect to the created formats.
+Methodology: Combining Housing_Data_2011 with Housing_Data_2012 to Housing_Data_2015.
+Use proc sort to create a temporary sorted table in descending by
+Housing_Data_2011_2015 and then se proc means to compute average housing price and 
+GDP by month or yearly. Then use proc sort to sort the result by year and look at GDP
+and housing price side by side in a table.
 
-Limitations: Even though predictive modeling is specified in the research
-questions, this methodology solely relies on a crude descriptive technique
-by looking at correlations along quartile values, which could be too coarse a
-method to find actual association between the variables.
+Limitations: This methodology solely relies on just looking at the result in the
+table, which could be too coarse a method to find actual association between the
+variables.
 
 Followup Steps: A possible follow-up to this approach could use an inferential
-statistical technique like linear regression.
+statistical technique like linear regression and add some graph.
 ;
 
 proc means min q1 median q3 max data=cde_2014_analytic_file;
@@ -133,25 +128,20 @@ run;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 *
-Question: What are the top ten schools were the number of high school graduates
-taking the SAT exceeds the number of high school graduates completing UC/CSU
-entrance requirements?
+Question: What is the difference in housing price between the houses near metro 
+area and the ones further from the metro area?
 
-Rationale: This would help identify schools with significant gaps in
-preparation specific for California's two public university systems, suggesting
-where focused outreach on UC/CSU college-preparation might have the greatest
-impact.
+Rationale: This should help the investors understand the housing price in 
+different areas of the market.
 
-Note: This compares the column NUMTSTTAKR from sat15 to the column TOTAL from
-gradaf15.
+Note: This would involve making table to show the housing price in different areas.
 
-Methodology: When combining sat15 and gradaf15 during data preparation, take
-the difference between NUMTSTTAKR in sat15 and TOTAL in gradaf15 for each
-school and create a new variable called excess_sat_takers. Here, use proc sort
-to create a temporary sorted table in descending by excess_sat_takers and then
-proc print to display the first 10 rows of the sorted dataset.
+Methodology:  Combining Housing_Data_2011 with Housing_Data_2012 to Housing_Data_2015.
+Use proc sort to create a temporary sorted table in descending by
+Housing_Data_2011_2015 and then use Proc mean to calculate the average price in each
+metro area and compare them.
 
-Limitations: This methodology does not account for schools with missing data,
+Limitations: This methodology does not account for missing data,
 nor does it attempt to validate data in any way, like filtering for values
 outside of admissable values.
 
