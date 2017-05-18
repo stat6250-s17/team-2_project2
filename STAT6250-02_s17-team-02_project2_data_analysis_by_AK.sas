@@ -41,3 +41,23 @@ Rational: This would help inform the investors whether increase in Average month
 */;
 
 
+proc sql outobs = 5;
+	select a.sub_area label = "District", a.avg_price label = "Average House Price per square meter"
+	from
+		(select sub_area, avg(price_doc/full_sq) as avg_price 
+		from Housing_Data_2014_raw_sorted
+		where full_sq <> 0
+		group by sub_area)a
+	order by a.avg_price desc;
+quit;
+
+
+proc sql outobs = 5;
+	select a.sub_area label = "District", a.avg_price label = "Average House Price per square meter"
+	from
+		(select sub_area, avg(price_doc/full_sq) as avg_price 
+		from Housing_Data_2014_raw_sorted
+		where full_sq <> 0
+		group by sub_area)a
+	order by a.avg_price asc;
+quit;
