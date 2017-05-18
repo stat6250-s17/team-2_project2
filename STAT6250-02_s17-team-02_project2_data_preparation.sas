@@ -89,7 +89,7 @@ https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.x
     %then
         %do;
             %put Loading dataset &dsn. over the wire now...;
-            filename tempfile "%sysfunc(getoption(work))/tempfile.xls";
+            filename tempfile "%sysfunc(getoption(work))/tempfile.xlsx";
             proc http
                 method="get"
                 url="&url."
