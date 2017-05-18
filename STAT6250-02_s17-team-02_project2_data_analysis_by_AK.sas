@@ -28,14 +28,16 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 /*
-Research Question: What are the top five districts that experienced the biggest increase in “Average House Price per square meter" between AY2014-15 and AY2015-16?
+Research Question: What are the top five districts that experienced the biggest increase in "Average House Price per square meter" between AY2014 and AY2015?
 Rationale: This should help identify districts to consider for investment having a high percentage increase in Average House Price per meter to gain more profit.
 
 
-Research Question: Can increase in Employment rate will be used to predict the “Average House Price per square meter”
+Research Question: Can increase in Employment rate will be used to predict the "Average House Price per square meter"
 Rational: This would help inform the investors whether change in employment rate has any effect on Average House Price per square meter
 
 
 Research Question: Can increase in Average monthly salary will be used to predict the “Average House Price per square meter”?
 Rational: This would help inform the investors whether increase in Average monthly salary has any effect on Average House Price per square meter
 */;
+
+
