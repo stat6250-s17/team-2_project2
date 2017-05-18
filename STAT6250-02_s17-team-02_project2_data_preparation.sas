@@ -61,7 +61,7 @@
 
 * setup environmental parameters;
 %let inputDataset1URL =
-https://github.com/stat6250/team-2_project2/blob/set-up/Data/macro.xls?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/Data/macro.xls?raw=true
 ;
 %let inputDataset1Type = XLS;
 %let inputDataset1DSN = macro_raw;
@@ -89,7 +89,7 @@ https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.x
     %then
         %do;
             %put Loading dataset &dsn. over the wire now...;
-            filename tempfile "%sysfunc(getoption(work))/tempfile.xlsx";
+            filename tempfile "%sysfunc(getoption(work))/tempfile.xls";
             proc http
                 method="get"
                 url="&url."
@@ -132,7 +132,7 @@ proc sort
         nodupkey
         data=macro_raw
         dupout=macro_raw_dups
-        out=macro_raw_sorted(where=(not(missing(School_Code))))
+        out=macro_raw_sorted(where=(not(missing(timestamp))))
     ;
     by
         timestamp
@@ -141,9 +141,9 @@ run;
 
 proc sort
         nodupkey
-        data=train_raw
-        dupout=train_raw_dups
-        out=train_raw_sorted
+        data=Housing_Data_2014_raw
+        dupout=Housing_Data_2014_raw_dups
+        out=Housing_Data_2014_raw_sorted
     ;
     by
        id
@@ -151,9 +151,9 @@ proc sort
 run;
 proc sort
         nodupkey
-        data=test_raw
-        dupout=test_raw_dups
-        out=test_raw_sorted
+        data=Housing_Data_2015_raw
+        dupout=Housing_Data_2015_raw_dups
+        out=Housing_Data_2015_raw_sorted
     ;
     by
         id
