@@ -33,7 +33,7 @@
 
 [Number of Features] 291
 
-[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/train.csv.zip
 
 [Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
 
@@ -51,7 +51,7 @@
 
 [Number of Features] 291
 
-[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/train.csv.zip
 
 [Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
 
@@ -68,15 +68,15 @@ https://github.com/stat6250/team-2_project2/blob/master/Data/macro.xls?raw=true
 
 
 %let inputDataset2URL =
-https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2014.xls?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2014.xlsx?raw=true
 ;
-%let inputDataset2Type = XLS;
+%let inputDataset2Type = XLSX;
 %let inputDataset2DSN = Housing_Data_2014_raw;
 
 %let inputDataset3URL =
-https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.xls?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.xlsx?raw=true
 ;
-%let inputDataset3Type = XLS;
+%let inputDataset3Type = XLSX;
 %let inputDataset3DSN = Housing_Data_2015_raw;
 
 * load raw datasets over the wire, if they doesn't already exist;
@@ -143,7 +143,7 @@ proc sort
         nodupkey
         data=Housing_Data_2014_raw
         dupout=Housing_Data_2014_raw_dups
-        out=Housing_Data_2014_raw_sorted
+        out=Housing_Data_2014_raw_sorted 
     ;
     by
        id
