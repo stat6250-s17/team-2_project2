@@ -200,3 +200,26 @@ create table Housing_Macro_Combined as
 ;
 run;
 
+*Combine Housing_Data_2014 and Housing_Data_2015 data vertically;
+Data housing_concat;
+	set Housing_Data_2014_raw_sorted Housing_Data_2015_raw_sorted;
+run;
+
+
+*Take average of housing price by day of the month;
+proc sql;
+    create table housing_price_ave as
+        select timestamp, avg(price_doc)as housing_price_avg
+        from housing_concat
+        group by timestamp
+    ;
+quit;
+
+*Combine housing_price_ave with macro data horizontally;
+Data housing_and_macro;
+	set housing_price_ave;
+	set Macro_raw_sorted;
+	by timestamp
+run;
+
+
