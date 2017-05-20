@@ -206,8 +206,8 @@ run;
 
 *Take average of housing price by day of the month;
 proc sql;
-    create table housing_price_ave as
-        select timestamp, avg(price_doc)as housing_price_avg
+    create table housing_price_avg as
+        select timestamp, avg(price_doc) as housing_price_avg
         from housing_concat
         group by timestamp
     ;
@@ -215,6 +215,28 @@ quit;
 
 *Combine housing_price_ave with macro data horizontally;
 Data housing_and_macro;
-	set housing_price_ave;
+	set housing_price_avg;
 	set Macro_raw_sorted;
+run;
+
+data housing_and_macro_edited;
+	retain
+		timestamp
+		housing_price_avg
+		cpi
+		income_per_cap
+		salary_growth
+		retail_trade_turnover_growth
+		labor_force
+		;
+	keep
+		timestamp
+		housing_price_avg
+		cpi
+		income_per_cap
+		salary_growth
+		retail_trade_turnover_growth
+		labor_force
+		;
+	set housing_and_macro;
 run;
