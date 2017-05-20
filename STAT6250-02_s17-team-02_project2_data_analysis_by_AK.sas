@@ -9,9 +9,9 @@
 This file uses the  analytic dataset to address several research
 questions regarding Average House Price per square meter.
 
-Dataset Name: (...........) created in external file
-STAT6250-02_s17-team-2_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
+Dataset Name: Housing_Data_2014_raw_sorted, Housing_Data_2015_raw_sorted and 
+macro_raw_sorted  created in external file STAT6250-02_s17-team-2_project2_data_
+preparation.sas, which is assumed to be in the same directory as this file
 
 See included file for dataset properties
 ;
