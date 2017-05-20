@@ -143,11 +143,9 @@ run;
 
 proc sort
         nodupkey
-
         data=Housing_Data_2014_raw
         dupout=Housing_Data_2014_raw_dups
         out=Housing_Data_2014_raw_sorted 
-
     ;
     by
        id
@@ -219,7 +217,4 @@ quit;
 Data housing_and_macro;
 	set housing_price_ave;
 	set Macro_raw_sorted;
-	by timestamp
 run;
-
-
