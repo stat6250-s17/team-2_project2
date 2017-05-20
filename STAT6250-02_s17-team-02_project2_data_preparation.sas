@@ -158,7 +158,7 @@ proc sort
         nodupkey
         data=Housing_Data_2015_raw
         dupout=Housing_2015_raw_dups
-        out=Housing_2015_raw_sorted
+        out=Housing_Data_2015_raw_sorted
     ;
     by
         id
