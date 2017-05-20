@@ -184,7 +184,7 @@ title4
 ;
 
 footnote1
-"Average monthly salary has weak negative correlation with Average House Price per square meter during AY2014 and AY2015"
+"Average monthly salary has vary weak negative correlation with Average House Price per square meter during AY2014 and AY2015"
 ;
 
 footnote2
@@ -202,11 +202,9 @@ footnote3
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters per day.
 
-Methodology: Housing_Macro_Combined datset is created using proc sql statement by 
-combining Housing_Data_2014_raw_sorted with Housing_Data_2015_raw sorted using 
-union and use aggregated function average to compute the average sale price per 
-total area in square meters for each day. Used label to display the data in user 
-friendly format. This combined dataset joined with macro_raw_sorted on timestamp.
+Methodology: Using proc corr procedure correlation matrix is generated between .
+Average monthly salary, Average income per capita and Average House Price per 
+square meter
 
 Limitations: This methodology does not account for days doesn't match between Macro 
 and Housing Data Set.
@@ -216,32 +214,6 @@ illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
 *******************************************************************************;
-
-proc sql noprint;
-create table Housing_Macro_Combined as
-	select  house_avg_price.timestamp as timestamp 
-				label="Date", 
-	   		house_avg_price.avg_price_sqm as avg_price_sqm 
-				label="Average House Price per square meter" , 
-	   		input(macro_raw_sorted.salary,18.) as salary 
-				label ="Average monthly salary " , 
-	   		input(macro_raw_sorted.income_per_cap,18.) as income_per_cap 
-				label = "Average income per capita "
-	from
-	(
-	 select timestamp, avg(price_doc/full_sq) as avg_price_sqm
-	 from Housing_Data_2014_raw_sorted
-	 where price_doc <> 0 and full_sq <> 0
-	 group by timestamp
-	 union all
-	 select timestamp, avg(price_doc/full_sq) as avg_price_sqm
-	 from Housing_Data_2015_raw_sorted
-	 where price_doc <> 0 and full_sq <> 0
-	 group by timestamp
-	) house_avg_price, macro_raw_sorted 
-	where house_avg_price.timestamp = macro_raw_sorted.timestamp
-;
-run;
 
 
 proc corr
