@@ -253,8 +253,5 @@ proc corr
 run;
 
 
-
-
-
  title;
  footnote;
