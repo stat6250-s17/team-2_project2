@@ -178,9 +178,9 @@ create table Housing_Macro_Combined as
 				label="Date", 
 	   		house_avg_price.avg_price_sqm as avg_price_sqm 
 				label="Average House Price per square meter" , 
-	   		input(macro_raw_sorted.salary,18.) as salary 
+	   		macro_raw_sorted.salary as salary 
 				label ="Average monthly salary " , 
-	   		input(macro_raw_sorted.income_per_cap,18.) as income_per_cap 
+	   		macro_raw_sorted.income_per_cap as income_per_cap 
 				label = "Average income per capita "
 	from
 	(
@@ -218,5 +218,3 @@ Data housing_and_macro;
 	set housing_price_ave;
 	set Macro_raw_sorted;
 run;
-
-
