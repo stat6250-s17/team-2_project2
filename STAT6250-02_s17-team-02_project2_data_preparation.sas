@@ -60,11 +60,13 @@
 --
 
 * setup environmental parameters;
-%let inputDataset1URL =
-https://github.com/stat6250/team-2_project2/blob/master/Data/macro.xls?raw=true
-;
-%let inputDataset1Type = XLS;
-%let inputDataset1DSN = macro_raw;
+%let inputDataset1URL = https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2014.csv?raw=true;
+%let inputDataset1Type = CSV;
+%let inputDataset1DSN = Housing_2014;
+
+%let inputDataset2URL = https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.csv?raw=true;
+%let inputDataset2Type = CSV;
+%let inputDataset2DSN = Housing_2015;
 
 
 %let inputDataset2URL =
@@ -78,6 +80,7 @@ https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.x
 ;
 %let inputDataset3Type = XLSX;
 %let inputDataset3DSN = Housing_Data_2015_raw;
+
 
 * load raw datasets over the wire, if they doesn't already exist;
 %macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
@@ -108,6 +111,8 @@ https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.x
             %put Dataset &dsn. already exists. Please delete and try again.;
         %end;
 %mend;
+
+
 %loadDataIfNotAlreadyAvailable(
     &inputDataset1DSN.,
     &inputDataset1URL.,
@@ -130,9 +135,9 @@ https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.x
   removing blank rows, if needed;
 proc sort
         nodupkey
-        data=macro_raw
-        dupout=macro_raw_dups
-        out=macro_raw_sorted(where=(not(missing(timestamp))))
+        data=Macro
+        dupout=Macro_dups
+        out=Macro_sorted(where=(not(missing(timestamp))))
     ;
     by
         timestamp
@@ -141,24 +146,28 @@ run;
 
 proc sort
         nodupkey
+
         data=Housing_Data_2014_raw
         dupout=Housing_Data_2014_raw_dups
         out=Housing_Data_2014_raw_sorted 
+
     ;
     by
        id
     ;
 run;
+
 proc sort
         nodupkey
-        data=Housing_Data_2015_raw
-        dupout=Housing_Data_2015_raw_dups
-        out=Housing_Data_2015_raw_sorted
+        data=Housing_2015
+        dupout=Housing_2015_dups
+        out=Housing_2015_sorted
     ;
     by
         id
     ;
 run;
+
 *******************************************************************************;
 *
 Housing_Macro_Combined datset is created using proc sql statement by 
@@ -193,3 +202,21 @@ create table Housing_Macro_Combined as
 	where house_avg_price.timestamp = macro_raw_sorted.timestamp
 ;
 run;
+
+* combine Housing_Data_2014 and Housing_Data_2015 data vertically, combine composite key values into a primary key
+  key, and compute year-over-year change in Percent_Eligible_FRPM_K12,
+  retaining all AY2014-15 fields and y-o-y Percent_Eligible_FRPM_K12 change;
+
+Data Housing.interlv;
+	set Housing_2014 Housing_2015;
+	by id
+run;
+
+proc sql;
+    create table Macro_and_Housing_Price_2014_2015 as
+        select Month, UniqueCarrier, avg(ArrDelay) as ArrDelay_avg
+        from flights_analytic_file
+        group by Month, UniqueCarrier
+        order by Month, UniqueCarrier desc
+    ;
+quit;
