@@ -61,15 +61,15 @@
 
 * setup environmental parameters;
 %let inputDataset1URL = https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2014.csv?raw=true;
-%let inputDataset1Type = csv;
-%let inputDataset1DSN = Housing.2014;
+%let inputDataset1Type = CSV;
+%let inputDataset1DSN = Housing_2014;
 
 %let inputDataset2URL = https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.csv?raw=true;
-%let inputDataset2Type = csv;
-%let inputDataset2DSN = Housing.2015;
+%let inputDataset2Type = CSV;
+%let inputDataset2DSN = Housing_2015;
 
 %let inputDataset3URL = https://github.com/stat6250/team-2_project2/blob/master/Data/macro_2014-2015.csv?raw=true;
-%let inputDataset3Type = csv;
+%let inputDataset3Type = CSV;
 %let inputDataset3DSN = Macro;
 
 * load raw datasets over the wire, if they doesn't already exist;
