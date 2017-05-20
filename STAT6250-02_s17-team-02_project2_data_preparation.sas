@@ -33,7 +33,7 @@
 
 [Number of Features] 291
 
-[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/train.csv.zip
 
 [Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
 
@@ -51,7 +51,7 @@
 
 [Number of Features] 291
 
-[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/test.csv.zip
+[Data Source] https://www.kaggle.com/c/sberbank-russian-housing-market/download/train.csv.zip
 
 [Data Dictionary] https://www.kaggle.com/c/sberbank-russian-housing-market/download/data_dictionary.txt
 
@@ -60,17 +60,24 @@
 --
 
 * setup environmental parameters;
-%let inputDataset1URL = https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2014.csv?raw=true;
-%let inputDataset1Type = CSV;
-%let inputDataset1DSN = Housing_2014;
+%let inputDataset1URL =
+https://github.com/stat6250/team-2_project2/blob/master/Data/macro_2014-2015.xlsx?raw=true
+;
+%let inputDataset1Type = XLSX;
+%let inputDataset1DSN = Macro_raw;
 
-%let inputDataset2URL = https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.csv?raw=true;
-%let inputDataset2Type = CSV;
-%let inputDataset2DSN = Housing_2015;
+%let inputDataset2URL =
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2014.xlsx?raw=true
+;
+%let inputDataset2Type = XLSX;
+%let inputDataset2DSN = Housing_Data_2014_raw;
 
-%let inputDataset3URL = https://github.com/stat6250/team-2_project2/blob/master/Data/macro_2014-2015.csv?raw=true;
-%let inputDataset3Type = CSV;
-%let inputDataset3DSN = Macro;
+%let inputDataset3URL =
+https://github.com/stat6250/team-2_project2/blob/master/Data/Housing_Data_2015.xlsx?raw=true
+;
+%let inputDataset3Type = XLSX;
+%let inputDataset3DSN = Housing_Data_2015_raw;
+
 
 * load raw datasets over the wire, if they doesn't already exist;
 %macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
@@ -82,7 +89,7 @@
     %then
         %do;
             %put Loading dataset &dsn. over the wire now...;
-            filename tempfile "%sysfunc(getoption(work))/tempfile.xls";
+            filename tempfile "%sysfunc(getoption(work))/tempfile.xlsx";
             proc http
                 method="get"
                 url="&url."
@@ -125,9 +132,9 @@
   removing blank rows, if needed;
 proc sort
         nodupkey
-        data=Macro
-        dupout=Macro_dups
-        out=Macro_sorted(where=(not(missing(timestamp))))
+        data=Macro_raw
+        dupout=Macro_raw_dups
+        out=macro_raw_sorted(where=(not(missing(timestamp))))
     ;
     by
         timestamp
@@ -136,9 +143,11 @@ run;
 
 proc sort
         nodupkey
-        data=Housing_2014
-        dupout=Housing_Data_2014_dups
-        out=Housing_2014_sorted
+
+        data=Housing_Data_2014_raw
+        dupout=Housing_Data_2014_raw_dups
+        out=Housing_Data_2014_raw_sorted 
+
     ;
     by
        id
@@ -147,29 +156,70 @@ run;
 
 proc sort
         nodupkey
-        data=Housing_2015
-        dupout=Housing_2015_dups
-        out=Housing_2015_sorted
+        data=Housing_Data_2015_raw
+        dupout=Housing_2015_raw_dups
+        out=Housing_Data_2015_raw_sorted
     ;
     by
         id
     ;
 run;
 
-* combine Housing_Data_2014 and Housing_Data_2015 data vertically, combine composite key values into a primary key
-  key, and compute year-over-year change in Percent_Eligible_FRPM_K12,
-  retaining all AY2014-15 fields and y-o-y Percent_Eligible_FRPM_K12 change;
-
-Data Housing.interlv;
-	set Housing_2014 Housing_2015;
-	by id
+*******************************************************************************;
+*
+Housing_Macro_Combined datset is created using proc sql statement by 
+combining Housing_Data_2014_raw_sorted with Housing_Data_2015_raw sorted using 
+union and use aggregated function average to compute the average sale price per 
+total area in square meters for each day. Used label to display the data in user 
+friendly format. This combined dataset joined with macro_raw_sorted on timestamp.
+;
+*******************************************************************************;
+proc sql noprint;
+create table Housing_Macro_Combined as
+	select  house_avg_price.timestamp as timestamp 
+				label="Date", 
+	   		house_avg_price.avg_price_sqm as avg_price_sqm 
+				label="Average House Price per square meter" , 
+	   		macro_raw_sorted.salary as salary 
+				label ="Average monthly salary " , 
+	   		macro_raw_sorted.income_per_cap as income_per_cap 
+				label = "Average income per capita "
+	from
+	(
+	 select timestamp, avg(price_doc/full_sq) as avg_price_sqm
+	 from Housing_Data_2014_raw_sorted
+	 where price_doc <> 0 and full_sq <> 0
+	 group by timestamp
+	 union all
+	 select timestamp, avg(price_doc/full_sq) as avg_price_sqm
+	 from Housing_Data_2015_raw_sorted
+	 where price_doc <> 0 and full_sq <> 0
+	 group by timestamp
+	) house_avg_price, macro_raw_sorted 
+	where house_avg_price.timestamp = macro_raw_sorted.timestamp
+;
 run;
 
+*Combine Housing_Data_2014 and Housing_Data_2015 data vertically;
+Data housing_concat;
+	set Housing_Data_2014_raw_sorted Housing_Data_2015_raw_sorted;
+run;
+
+
+*Take average of housing price by day of the month;
 proc sql;
-    create table Macro_and_Housing_Price_2014_2015 as
-        select Month, UniqueCarrier, avg(ArrDelay) as ArrDelay_avg
-        from flights_analytic_file
-        group by Month, UniqueCarrier
-        order by Month, UniqueCarrier desc
+    create table housing_price_ave as
+        select timestamp, avg(price_doc)as housing_price_avg
+        from housing_concat
+        group by timestamp
     ;
 quit;
+
+*Combine housing_price_ave with macro data horizontally;
+Data housing_and_macro;
+	set housing_price_ave;
+	set Macro_raw_sorted;
+	by timestamp
+run;
+
+
