@@ -27,12 +27,28 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
-*
-Question: Has the price of the house kept increasing or decreasing from 2010 to 
-2016 and at what rate? 
 
-Rationale: This should help the investors to see how the housing market behave 
-from 2010 to 2016.
+title1
+'Research Question: Has the price of the house kept increasing or decreasing from 2010 to 
+2016 and at what rate?'
+;
+
+title2
+'Rationale: This should help the investors to see how the housing market behave 
+from 2010 to 2016.'
+;
+
+footnote1
+'From Janaury 2014 to June 2015, the housing price in Russia has increased from 7,002,025 Ruble to 8,062,025 Ruble. '
+;
+
+footnote2
+'We can we the consistent increase from Janaury 2014 until March 2015, then the housing prices started to decrease.'
+;
+
+*
+
+
 
 Note: This would involve combining housing data from 2011-2015 and taking the 
 average of housing price by monthly or yearly.
@@ -67,11 +83,28 @@ footnote;
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
-*
-Question: What is the relationship between housing price and GDP?
+title1
+'Research Question: What is the relationship between housing price and economics
+indicators such as cpi, salary growth, income per capita, etc?'
+;
 
-Rationale: This should help the investors understand the picture and the 
-relaionship between GDP and housing price.
+title2
+'Rationale: This should help the investors understand the picture and the 
+relaionship between economics indicators and housing price.'
+;
+
+footnote1
+'At the first glance the economics indicators that increase along with housing
+price from Janaury 2014 to March 2015 are CPI, income per capita'
+;
+
+footnote2
+'We don't see any increase for salary grwoth and labor force. Salar growth
+actually went down while labor force approximately going side way.'
+;
+
+*
+
 
 Note: This would involve merging two data sets one from macroeconomics data set
 and housing data set then we can make a table or a graph to see the relationship.
@@ -92,21 +125,35 @@ statistical technique like linear regression and add some graph.
 
 proc means data=housing_and_macro_edited;
   where timestamp between '09JAN2014'd and '30JUN2015'd ;
-  class timestamp ;
-  format timestamp yymon. ;
-  var price_doc cpi income_per_cap salary_grwoth labor_force ;
+  class timestamp cpi income_per_cap salary_growth labor_force;
+  format timestamp yymon.;
+  var housing_price_avg;
 run;
-
+title;
+footnote;
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
-*
-Question: What is the difference in housing price between the houses near metro 
-area and the ones further from the metro area?
+title1
+'Research Question: What is the difference in housing price between the houses near metro 
+area and the ones further from the metro area?'
+;
 
-Rationale: This should help the investors understand the housing price in 
-different areas of the market.
+title2
+'Rationale: This should help the investors understand the housing price in 
+different areas of the market.'
+;
+
+footnote1
+'As expected houses close to metro area are more expensive which is about 25% more expensive.'
+;
+
+footnote2
+'Majority of the houses are near metro area and the average price is about 7,699,464 Ruble.'
+;
+
+*
 
 Note: This would involve making table to show the housing price in different areas.
 
@@ -142,4 +189,5 @@ proc means mean data=housing_concat;
     format metro_min_walk $metro_min_walk_bins.;
     output out=house_price_metro;
 run;
- 
+title;
+footnote;
