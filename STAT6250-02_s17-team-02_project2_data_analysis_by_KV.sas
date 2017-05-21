@@ -29,13 +29,11 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-'Research Question: Has the price of the house kept increasing or decreasing from 2010 to 
-2016 and at what rate?'
+'Research Question: Has the price of the house kept increasing or decreasing from 2010 to 2016 and at what rate?'
 ;
 
 title2
-'Rationale: This should help the investors to see how the housing market behave 
-from 2010 to 2016.'
+'Rationale: This should help the investors to see how the housing market behave from 2010 to 2016.'
 ;
 
 footnote1
@@ -80,23 +78,19 @@ footnote;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 title1
-'Research Question: What is the relationship between housing price and economics
-indicators such as cpi, salary growth, income per capita, etc?'
+'Research Question: What is the relationship between housing price and economics indicators such as cpi, salary growth, income per capita, etc?'
 ;
 
 title2
-'Rationale: This should help the investors understand the picture and the 
-relaionship between economics indicators and housing price.'
+'Rationale: This should help the investors understand the picture and the relaionship between economics indicators and housing price.'
 ;
 
 footnote1
-'At the first glance the economics indicators that increase along with housing
-price from Janaury 2014 to March 2015 are CPI, income per capita'
+'At the first glance the economics indicators that increase along with housing price from Janaury 2014 to March 2015 are CPI, income per capita'
 ;
 
 footnote2
-'We don't see any increase for salary grwoth and labor force. Salar growth
-actually went down while labor force approximately going side way.'
+'We don't see any increase for salary grwoth and labor force. Salar growth actually went down while labor force approximately going side way.'
 ;
 
 *
@@ -131,13 +125,11 @@ footnote;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 title1
-'Research Question: What is the difference in housing price between the houses near metro 
-area and the ones further from the metro area?'
+'Research Question: What is the difference in housing price between the houses near metro area and the ones further from the metro area?'
 ;
 
 title2
-'Rationale: This should help the investors understand the housing price in 
-different areas of the market.'
+'Rationale: This should help the investors understand the housing price in different areas of the market.'
 ;
 
 footnote1
