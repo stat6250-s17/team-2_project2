@@ -112,8 +112,8 @@ proc print
 run;
  
  
-
-
+title,
+footnote;
 
 
 *******************************************************************************;
@@ -194,6 +194,9 @@ proc print
      data=mean_of_price_by_type;
 run;
 
+ 
+title,
+footnote;
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
@@ -252,3 +255,6 @@ proc corr
 run;
  
  
+ 
+title,
+footnote;
