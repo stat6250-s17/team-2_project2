@@ -146,7 +146,8 @@ proc sort
         data=Housing_Data_2014_raw
         dupout=Housing_Data_2014_raw_dups
         out=Housing_Data_2014_raw_sorted 
-    ;
+
+;
     by
        id
     ;
@@ -156,7 +157,8 @@ proc sort
         nodupkey
         data=Housing_Data_2015_raw
         dupout=Housing_2015_raw_dups
-        out=Housing_Data_2015_raw_sorted
+
+out=Housing_Data_2015_raw_sorted
     ;
     by
         id
@@ -164,8 +166,8 @@ proc sort
 run;
 
 *******************************************************************************;
-*
-Housing_Macro_Combined datset is created using proc sql statement by 
+*Housing_Macro_Combined datset is created using proc sql statement by 
+
 combining Housing_Data_2014_raw_sorted with Housing_Data_2015_raw sorted using 
 union and use aggregated function average to compute the average sale price per 
 total area in square meters for each day. Used label to display the data in user 
@@ -175,7 +177,7 @@ friendly format. This combined dataset joined with macro_raw_sorted on timestamp
 proc sql noprint;
 create table Housing_Macro_Combined as
 	select  house_avg_price.timestamp as timestamp 
-				label="Date", 
+label="Date", 
 	   		house_avg_price.avg_price_sqm as avg_price_sqm 
 				label="Average House Price per square meter" , 
 	   		macro_raw_sorted.salary as salary 
@@ -184,7 +186,7 @@ create table Housing_Macro_Combined as
 				label = "Average income per capita "
 	from
 	(
-	 select timestamp, avg(price_doc/full_sq) as avg_price_sqm
+a	 select timestamp, avg(price_doc/full_sq) as avg_price_sqm
 	 from Housing_Data_2014_raw_sorted
 	 where price_doc <> 0 and full_sq <> 0
 	 group by timestamp
@@ -194,7 +196,7 @@ create table Housing_Macro_Combined as
 	 where price_doc <> 0 and full_sq <> 0
 	 group by timestamp
 	) house_avg_price, macro_raw_sorted 
-	where house_avg_price.timestamp = macro_raw_sorted.timestamp
+c	where house_avg_price.timestamp = macro_raw_sorted.timestamp
 ;
 run;
 
@@ -204,7 +206,7 @@ Data housing_concat;
 run;
 
 
-*Take average of housing price by day of the month;
+o*Take average of housing price by day of the month;
 proc sql;
     create table housing_price_avg as
         select timestamp, avg(price_doc) as housing_price_avg
@@ -240,3 +242,27 @@ data housing_and_macro_edited;
 		;
 	set housing_and_macro;
 run;
+
+
+
+* build analytic dataset with the least number of columns
+
+and minimal cleaning/transformation needed to address research questions in
+
+corresponding data-analysis files;
+
+data housing_analytic_file;
+        retain
+	       timestamp
+	       product_type
+	       ecology
+	       cafe_count_500
+	       ;
+	keep
+               timestamp
+               product_type
+               ecology
+               cafe_count_500
+               ;
+	set Housing_concat;
+	run;
