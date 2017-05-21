@@ -47,9 +47,6 @@ footnote2
 ;
 
 *
-
-
-
 Note: This would involve combining housing data from 2011-2015 and taking the 
 average of housing price by monthly or yearly.
 
@@ -79,7 +76,6 @@ footnote;
 
 
 
-
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
@@ -104,8 +100,6 @@ actually went down while labor force approximately going side way.'
 ;
 
 *
-
-
 Note: This would involve merging two data sets one from macroeconomics data set
 and housing data set then we can make a table or a graph to see the relationship.
 
@@ -132,6 +126,7 @@ run;
 title;
 footnote;
 
+
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
@@ -154,7 +149,6 @@ footnote2
 ;
 
 *
-
 Note: This would involve making table to show the housing price in different areas.
 
 Methodology:  Combining Housing_Data_2011 with Housing_Data_2012 to Housing_Data_2015.
@@ -171,8 +165,6 @@ statistics computed do not include any possible illegal values, and better
 handle missing data, e.g., by using a previous year's data or a rolling average
 of previous years' data as a proxy.
 ;
-
-
 
 proc format;
     value $metro_min_walk_bins
