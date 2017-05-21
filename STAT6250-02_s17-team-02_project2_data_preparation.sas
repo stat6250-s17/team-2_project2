@@ -240,3 +240,38 @@ data housing_and_macro_edited;
 		;
 	set housing_and_macro;
 run;
+
+* build analytic dataset with the least number of columns
+and minimal cleaning/transformation needed to address research questions in
+corresponding data-analysis files;
+ 
+data housing_analytic_file;
+ 
+        retain
+ 
+                  timestamp
+ 
+                  product_type
+ 
+                  ecology
+ 
+                  cafe_count_500
+
+	          price_doc
+ 
+                  ;
+           keep
+               timestamp
+ 
+               product_type
+ 
+               ecology
+ 
+               cafe_count_500
+
+	       price_doc
+ 
+               ;
+           set Housing_concat
+       ;
+  run;
