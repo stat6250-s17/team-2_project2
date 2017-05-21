@@ -25,7 +25,10 @@
 
 [Dataset 5 Name] Housing_Data_2014
 
-[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property (from 2014)
+[Dataset Description] this dataset includes information about individual
+transactions. The rows are indexed by the "id" field, which refers to individual
+transactions. These files also include supplementary information about the local
+area of each property (from 2014)
 
 [Experimental Unit Description] Housing data from Sberbank Russian Housing Market
 
@@ -43,7 +46,10 @@
 
 [Dataset 6 Name] Housing_Data_2015
 
-[Dataset Description] this dataset includes information about individual transactions. The rows are indexed by the "id" field, which refers to individual transactions. These files also include supplementary information about the local area of each property (from 2015)
+[Dataset Description] this dataset includes information about individual
+transactions. The rows are indexed by the "id" field, which refers to individual
+transactions. These files also include supplementary information about the local
+area of each property (from 2015)
 
 [Experimental Unit Description] Housing data from Sberbank Russian Housing Market
 
