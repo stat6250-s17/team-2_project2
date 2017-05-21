@@ -21,7 +21,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 * load external file that generates analytic dataset cde_2014_analytic_file;
-%include '.\STAT6250-02_s17-team-0\2_project2_data_preparation.sas';
+%include '.\STAT6250-02_s17-team-02_project2_data_preparation.sas';
 
 
 *******************************************************************************;
@@ -51,17 +51,17 @@ illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
 
-proc sort
-        data=cde_2014_analytic_file
-        out=cde_2014_analytic_file_sorted
-    ;
-    by descending frpm_rate_change_2014_to_2015;
-run;
 
-proc print data=cde_2014_analytic_file_sorted(obs=5);
-    id School_Name;
-    var frpm_rate_change_2014_to_2015;
+proc means data=housing_concat nway;
+  where timestamp between '09JAN2014'd and '30JUN2015'd ;
+  class timestamp ;
+  format timestamp yymon. ;
+  var price_doc ;
 run;
+title;
+footnote;
+
+
 
 
 *******************************************************************************;
@@ -90,39 +90,13 @@ Followup Steps: A possible follow-up to this approach could use an inferential
 statistical technique like linear regression and add some graph.
 ;
 
-proc means min q1 median q3 max data=cde_2014_analytic_file;
-    var
-        Percent_Eligible_FRPM_K12
-        PCTGE1500
-    ;
+proc means data=housing_and_macro_edited;
+  where timestamp between '09JAN2014'd and '30JUN2015'd ;
+  class timestamp ;
+  format timestamp yymon. ;
+  var price_doc cpi income_per_cap salary_grwoth labor_force ;
 run;
-proc format;
-    value Percent_Eligible_FRPM_K12_bins
-        low-<.39="Q1 FRPM"
-        .39-<.69="Q2 FRPM"
-        .69-<.86="Q3 FRPM"
-        .86-high="Q4 FRPM"
-    ;
-    value PCTGE1500_bins
-        low-20="Q1 SAT_Scores_GE_1500"
-        20-<37="Q2 SAT_Scores_GE_1500"
-        37-<56.3="Q3 SAT_Scores_GE_1500"
-        56.3-high="Q4 SAT_Scores_GE_1500"
-    ;
-run;
-proc freq data=cde_2014_analytic_file;
-    table
-             Percent_Eligible_FRPM_K12
-            *PCTGE1500
-            / missing norow nocol nopercent
-    ;
-        where not(missing(PCTGE1500))
-    ;
-    format
-        Percent_Eligible_FRPM_K12 Percent_Eligible_FRPM_K12_bins.
-        PCTGE1500 PCTGE1500_bins.
-    ;
-run;
+
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
@@ -151,15 +125,21 @@ handle missing data, e.g., by using a previous year's data or a rolling average
 of previous years' data as a proxy.
 ;
 
-proc sort
-        data=cde_2014_analytic_file
-        out=cde_2014_analytic_file_sorted
+
+
+proc format;
+    value $metro_min_walk_bins
+        low-<10="Close to Metro Area"
+        10-<40="Near Metro Area"
+        40-<70="Moderately Near to Metro Area"
+        70.00-high="Far from Metra Area"
     ;
-    by descending excess_sat_takers;
 run;
 
-proc print data=cde_2014_analytic_file_sorted(obs=10);
-    id School_Name;
-    var excess_sat_takers;
+proc means mean data=housing_concat;
+    class metro_min_walk;
+    var price_doc;
+    format metro_min_walk $metro_min_walk_bins.;
+    output out=house_price_metro;
 run;
-
+ 
