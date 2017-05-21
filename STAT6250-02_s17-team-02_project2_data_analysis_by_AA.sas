@@ -50,6 +50,7 @@ helpful in predicting the price of the house
 title1
  
 'Research Question:what is the average price for each ecology level?'
+
 ;
  
  
@@ -65,6 +66,7 @@ title2
 footnote1
  
 " From the table above we can see the mean price for each ecology level "
+
 ;
  
  
@@ -76,25 +78,44 @@ footnote2
 ;
 
 footnote3
+
 "Followup Steps:we can do a regression analysis to check if the ecology level is helpful in predicting the price of the house" 
+
 ; 
  
-proc means data = housing_analytic_file  nway noprint mean;
-var price_doc ;
-class ecology;
-output out = mean_of_price_by_ecology_level
-mean=Mean_Price
-;
+proc means 
+   data = housing_analytic_file  nway noprint mean;
+        var
+           price_doc
+           ;
+       class
+           ecology
+           ;
+  output out = mean_of_price_by_ecology_level
+  mean=Mean_Price
+          ;
 run;
 
+
 data mean_of_price_by_ecology_level;
-set mean_of_price_by_ecology_level;
-drop _TYPE_ _FREQ_;run;
+   set 
+       mean_of_price_by_ecology_level;
+   drop
+       _TYPE_ _FREQ_
+   ;
+run;
  
-proc print  data=mean_of_price_by_ecology_level;
+
+
+proc print 
+    data=mean_of_price_by_ecology_level;
 run;
  
  
+
+
+
+
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
@@ -146,19 +167,31 @@ footnote2
 ;
 
 
-proc means data = housing_analytic_file nway noprint ;
-var price_doc ;
-class Product_type;
-output out = mean_of_price_by_type
-mean=Mean_Price
-;
+proc means 
+    data = housing_analytic_file nway noprint ;
+      var
+          price_doc 
+          ;
+      class
+          Product_type
+          ;
+     output out = mean_of_price_by_type
+     mean=Mean_Price
+         ;
 run;
+
+
 data mean_of_price_by_type ;
-set mean_of_price_by_type ;
-drop _TYPE_ _FREQ_;
+    set 
+       mean_of_price_by_type ;
+    
+    drop
+       _TYPE_ _FREQ_;
 run;
  
-proc print  data=mean_of_price_by_type;
+ 
+proc print 
+     data=mean_of_price_by_type;
 run;
 
 
@@ -211,8 +244,11 @@ footnote2
  
 ;
  
-proc corr data=housing_analytic_file ;
-var price_doc  cafe_count_500;
+ 
+proc corr 
+   data=housing_analytic_file ;
+     var 
+        price_doc  cafe_count_500;
 run;
  
  
