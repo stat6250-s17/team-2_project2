@@ -261,6 +261,8 @@ data housing_analytic_file;
 	       ecology
 
 	       cafe_count_500
+         
+         price_doc
 
 	       ;
 	keep
@@ -271,6 +273,8 @@ data housing_analytic_file;
                ecology
 
                cafe_count_500
+               
+               price_doc
 
                ;
 	set Housing_concat
