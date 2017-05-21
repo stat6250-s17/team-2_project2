@@ -177,7 +177,7 @@ create table Housing_Macro_Combined as
 	select  house_avg_price.timestamp as timestamp 
 				label="Date", 
 
-house_avg_price.avg_price_sqm as avg_price_sqm 
+		house_avg_price.avg_price_sqm as avg_price_sqm 
 				label="Average House Price per square meter" , 
 	   		macro_raw_sorted.salary as salary 
 				label ="Average monthly salary " , 
