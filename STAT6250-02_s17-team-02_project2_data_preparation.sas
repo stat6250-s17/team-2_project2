@@ -176,7 +176,8 @@ proc sql noprint;
 create table Housing_Macro_Combined as
 	select  house_avg_price.timestamp as timestamp 
 				label="Date", 
-	   		house_avg_price.avg_price_sqm as avg_price_sqm 
+
+house_avg_price.avg_price_sqm as avg_price_sqm 
 				label="Average House Price per square meter" , 
 	   		macro_raw_sorted.salary as salary 
 				label ="Average monthly salary " , 
@@ -240,3 +241,38 @@ data housing_and_macro_edited;
 		;
 	set housing_and_macro;
 run;
+
+
+******************************************************************************;
+* 
+build analytic dataset with the least number of columns
+and minimal cleaning/transformation needed to address research questions in
+corresponding data-analysis files
+;
+******************************************************************************;
+data housing_analytic_file;
+
+        retain
+
+	       timestamp
+
+	       product_type
+
+	       ecology
+
+	       cafe_count_500
+
+	       ;
+	keep
+               timestamp
+
+               product_type
+
+               ecology
+
+               cafe_count_500
+
+               ;
+	set Housing_concat
+       ;
+  run;
