@@ -42,16 +42,16 @@ title4
 ;
 
 footnote1
-"Horoshevo-Mnevniki district has highest Average House Price per square meter during AY2014 and AY2015 "
+'Horoshevo-Mnevniki district has highest Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 
 footnote2
-"Given the magnitude of these average house price, further investigation should be performed to ensure no data errors are involved."
+'Given the magnitude of these average house price, further investigation should be performed to ensure no data errors are involved.'
 ;
 
 footnote3
-"However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
+'However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals.'
 ;
 
 *
@@ -110,15 +110,15 @@ title4
 ;
 
 footnote1
-"Molzhaninovskoe district has lowest Average House Price per square meter during AY2014 and AY2015"
+'Molzhaninovskoe district has lowest Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 footnote2
-"Given the magnitude of these lowest average house price, further investigation should be performed to ensure no data errors are involved."
+'Given the magnitude of these lowest average house price, further investigation should be performed to ensure no data errors are involved.'
 ;
 
 footnote3
-"However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
+'However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals.'
 ;
 
 *
@@ -175,15 +175,15 @@ title4
 ;
 
 footnote1
-"Average monthly salary has vary weak negative correlation with Average House Price per square meter during AY2014 and AY2015"
+'Average monthly salary has vary weak negative correlation with Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 footnote2
-"Average income per capita has weak positive correlation with Average House Price per square meter during AY2014 and AY2015"
+'Average income per capita has weak positive correlation with Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 footnote3
-"As there are few variation in Average income per capita and Average monthly salary, further investigation should be performed to ensure no data errors are involved."
+'As there are few variation in Average income per capita and Average monthly salary, further investigation should be performed to ensure no data errors are involved.'
 ;
 
 *
