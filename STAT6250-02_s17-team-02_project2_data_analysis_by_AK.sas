@@ -1,5 +1,3 @@
-
-
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
@@ -19,8 +17,7 @@ See included file for dataset properties
 * environmental setup;
 
 * set relative file import path to current directory (using standard SAS trick);
-X 
-"cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
 ;
 
 
@@ -57,7 +54,6 @@ footnote3
 "However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
 ;
 
-*******************************************************************************;
 *
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters.
@@ -74,7 +70,6 @@ Follow-up Steps: More carefully clean values in order to filter out any possible
 illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
-*******************************************************************************;
 
 proc sql outobs = 5;
     select Housing_Data_Group.sub_area label = "District", Housing_Data_Group.avg_price label = "Average House Price per square meter"
@@ -93,9 +88,8 @@ proc sql outobs = 5;
 		group by Housing_Data_combined.sub_area) Housing_Data_Group
 	order by Housing_Data_Group.avg_price desc;
 quit;
-
- title;
- footnote;
+title;
+footnote;
 
 
 
@@ -127,7 +121,6 @@ footnote3
 "However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
 ;
 
-*******************************************************************************;
 *
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters.
@@ -144,7 +137,6 @@ Follow-up Steps: More carefully clean values in order to filter out any possible
 illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
-*******************************************************************************;
 
 proc sql outobs = 5;
     select Housing_Data_Group.sub_area label = "District", Housing_Data_Group.avg_price label = "Average House Price per square meter"
@@ -163,9 +155,8 @@ proc sql outobs = 5;
 		group by Housing_Data_combined.sub_area) Housing_Data_Group
 	order by Housing_Data_Group.avg_price asc;
 quit;
-
- title;
- footnote;
+title;
+footnote;
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
@@ -195,9 +186,6 @@ footnote3
 "As there are few variation in Average income per capita and Average monthly salary, further investigation should be performed to ensure no data errors are involved."
 ;
 
-
-
-*******************************************************************************;
 *
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters per day.
@@ -213,8 +201,6 @@ Follow-up Steps: More carefully clean values in order to filter out any possible
 illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
-*******************************************************************************;
-
 
 proc corr
 	nosimple 
@@ -223,7 +209,5 @@ proc corr
  	var avg_price_sqm income_per_cap salary
 	;
 run;
-
-
- title;
- footnote;
+title;
+footnote;
