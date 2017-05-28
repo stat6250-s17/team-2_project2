@@ -83,30 +83,6 @@ footnote3
 
 ; 
  
-proc means 
-   data = housing_analytic_file  nway noprint mean;
-        var
-           price_doc
-           ;
-       class
-           ecology
-           ;
-  output out = mean_of_price_by_ecology_level
-  mean=Mean_Price
-          ;
-run;
-
-
-data mean_of_price_by_ecology_level;
-   set 
-       mean_of_price_by_ecology_level;
-   drop
-       _TYPE_ _FREQ_
-   ;
-run;
- 
-
-
 proc print 
     data=mean_of_price_by_ecology_level;
 run;
@@ -167,29 +143,6 @@ footnote2
 ;
 
 
-proc means 
-    data = housing_analytic_file nway noprint ;
-      var
-          price_doc 
-          ;
-      class
-          Product_type
-          ;
-     output out = mean_of_price_by_type
-     mean=Mean_Price
-         ;
-run;
-
-
-data mean_of_price_by_type ;
-    set 
-       mean_of_price_by_type ;
-    
-    drop
-       _TYPE_ _FREQ_;
-run;
- 
- 
 proc print 
      data=mean_of_price_by_type;
 run;
