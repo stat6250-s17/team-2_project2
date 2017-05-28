@@ -1,5 +1,3 @@
-
-
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
@@ -19,8 +17,7 @@ See included file for dataset properties
 * environmental setup;
 
 * set relative file import path to current directory (using standard SAS trick);
-X 
-"cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
 ;
 
 
@@ -33,31 +30,29 @@ X
 *******************************************************************************;
 
 title1
-'Research Question: What are the top five districts districts that have highest "Average House Price per square meter" between AY2014 and AY2015?'
+'Research Question: What are the top five districts districts that have highest "Average House Price per square meter" between AY2014
+ and AY2015?'
 ;
 
 title2
-'Rationale: This should help identify districts to consider for investment having highest or lowest "Average House Price per square meter" respectively.'
+'Rationale: This should help identify districts to consider for investment having highest "Average House Price per square meter".'
 ;
 
-title4
+title3
 'Top 5 Districts having highest "Average House Price per square meter".'
 ;
 
 footnote1
-"Horoshevo-Mnevniki district has highest Average House Price per square meter during AY2014 and AY2015 "
+'Horoshevo-Mnevniki district has highest Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 
 footnote2
-"Given the magnitude of these average house price, further investigation should be performed to ensure no data errors are involved."
+'Given the magnitude of these average house price, further investigation should be performed to ensure no data errors are involved.'
 ;
 
-footnote3
-"However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
-;
 
-*******************************************************************************;
+              
 *
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters.
@@ -74,7 +69,6 @@ Follow-up Steps: More carefully clean values in order to filter out any possible
 illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
-*******************************************************************************;
 
 proc sql outobs = 5;
     select Housing_Data_Group.sub_area label = "District", Housing_Data_Group.avg_price label = "Average House Price per square meter"
@@ -93,9 +87,8 @@ proc sql outobs = 5;
 		group by Housing_Data_combined.sub_area) Housing_Data_Group
 	order by Housing_Data_Group.avg_price desc;
 quit;
-
- title;
- footnote;
+title;
+footnote;
 
 
 
@@ -108,26 +101,24 @@ title1
 ;
 
 title2
-'Rationale: This should help identify districts to avoid for investment having highest or lowest "Average House Price per square meter" respectively.'
+'Rationale: This should help identify districts to avoid for investment having lowest "Average House Price per square meter".'
 ;
 
-title4
+title3
 'Bottom 5 Districts having lowest "Average House Price per square meter".'
 ;
 
 footnote1
-"Molzhaninovskoe district has lowest Average House Price per square meter during AY2014 and AY2015"
+'Molzhaninovskoe district has lowest Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 footnote2
-"Given the magnitude of these lowest average house price, further investigation should be performed to ensure no data errors are involved."
+'Given the magnitude of these lowest average house price, further investigation should be performed to ensure no data errors are 
+ involved.'
 ;
 
-footnote3
-"However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
-;
 
-*******************************************************************************;
+
 *
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters.
@@ -144,7 +135,6 @@ Follow-up Steps: More carefully clean values in order to filter out any possible
 illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
-*******************************************************************************;
 
 proc sql outobs = 5;
     select Housing_Data_Group.sub_area label = "District", Housing_Data_Group.avg_price label = "Average House Price per square meter"
@@ -163,20 +153,21 @@ proc sql outobs = 5;
 		group by Housing_Data_combined.sub_area) Housing_Data_Group
 	order by Housing_Data_Group.avg_price asc;
 quit;
-
- title;
- footnote;
+title;
+footnote;
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
 title1
-'Research Question: Does Average monthly salary and Average income per capita correlated with the Average House Price per square meter between AY2014 and AY2015?'
+'Research Question: Does Average monthly salary and Average income per capita correlated with the Average House Price per square meter 
+ between AY2014 and AY2015?'
 ;
 
 title2
-'Rationale: This should help identify the correlation between the Average monthly salary and Average income per capita correlated with the Average House Price per square meter.'
+'Rationale: This should help identify the correlation between the Average monthly salary and Average income per capita correlated with 
+ the Average House Price per square meter.'
 ;
 
 title4
@@ -184,20 +175,18 @@ title4
 ;
 
 footnote1
-"Average monthly salary has vary weak negative correlation with Average House Price per square meter during AY2014 and AY2015"
+'Average monthly salary has vary weak negative correlation with Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 footnote2
-"Average income per capita has weak positive correlation with Average House Price per square meter during AY2014 and AY2015"
+'Average income per capita has weak positive correlation with Average House Price per square meter during AY2014 and AY2015.'
 ;
 
 footnote3
-"As there are few variation in Average income per capita and Average monthly salary, further investigation should be performed to ensure no data errors are involved."
+'As there are few variation in Average income per capita and Average monthly salary, further investigation should be performed to 
+ ensure no data errors are involved.'
 ;
 
-
-
-*******************************************************************************;
 *
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters per day.
@@ -213,8 +202,6 @@ Follow-up Steps: More carefully clean values in order to filter out any possible
 illegal values, and better handle missing data, e.g., by using a previous year's
 data or a rolling average of previous years' data as a proxy.
 ;
-*******************************************************************************;
-
 
 proc corr
 	nosimple 
@@ -224,6 +211,5 @@ proc corr
 	;
 run;
 
-
- title;
- footnote;
+title;
+footnote;
