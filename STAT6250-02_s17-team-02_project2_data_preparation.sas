@@ -300,7 +300,11 @@ data housing_analytic_file;
 
 
 
-
+******************************************************************************;
+*
+using data step after proc means to remove unnecessary numbers from the output
+;
+******************************************************************************;
 proc means 
    data = housing_analytic_file  nway noprint mean;
         var
@@ -314,7 +318,6 @@ proc means
           ;
 run;
 
-
 data mean_of_price_by_ecology_level;
    set 
        mean_of_price_by_ecology_level;
@@ -323,7 +326,11 @@ data mean_of_price_by_ecology_level;
    ;
 run;
  
- 
+******************************************************************************;
+*
+using data step after proc means to remove unnecessary numbers from the output
+;
+******************************************************************************;
  proc means 
     data = housing_analytic_file nway noprint ;
       var
