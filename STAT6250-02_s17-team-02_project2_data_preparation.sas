@@ -254,7 +254,7 @@ proc format;
         low-<10="Close to Metro Area"
         10-<40="Near Metro Area"
         40-<70="Moderately Near to Metro Area"
-        70.00-high="Far from Metra Area"
+        70.00-high="Far from Metro Area"
     ;
 run;
 
