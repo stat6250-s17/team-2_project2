@@ -36,11 +36,11 @@ footnote1
 ;
 
 footnote2 
-"the numbers may be confusing since the mean price is almost the same for excellent and satisfactory so we would need to consider other variables such as the size of the lot  "
+"the mean price here does not consider other variables such as the size of the lot  "
 ;
 
 footnote3
-"Followup Steps:we can do a regression analysis to check if the ecology level is helpful in predicting the price of the house" 
+"Followup Steps:we can do a regression analysis to check if the ecology level is helpful in predicting the price" 
 ; 
 
 *
