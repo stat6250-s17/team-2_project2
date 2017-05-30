@@ -158,15 +158,6 @@ handle missing data, e.g., by using a previous year's data or a rolling average
 of previous years' data as a proxy.
 ;
 
-proc format;
-    value $metro_min_walk_bins
-        low-<10="Close to Metro Area"
-        10-<40="Near Metro Area"
-        40-<70="Moderately Near to Metro Area"
-        70.00-high="Far from Metra Area"
-    ;
-run;
-
 proc means mean data=housing_concat;
     class metro_min_walk;
     var price_doc;
