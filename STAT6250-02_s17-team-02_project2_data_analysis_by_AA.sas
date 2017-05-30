@@ -24,7 +24,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1 
-'Research Question:what is the average price for each ecology level?'
+'Research Question: what is the average price for each ecology level?'
 ;
  
 title2
@@ -40,7 +40,7 @@ footnote2
 ;
 
 footnote3
-"Followup Steps:we can do a regression analysis to check if the ecology level is helpful in predicting the price" 
+"Follow up Steps: we can do a regression analysis to check if the ecology level is helpful in predicting the price" 
 ; 
 
 *
@@ -52,7 +52,7 @@ Limitations: the numbers may be confusing since the mean prices is almost the
 same for excellent and satisfactory so we would need to consider other 
 variables such as the size of the lot 
 
-Followup Steps:we can do a regression analysis to check if the ecology level is
+Follow up Steps: we can do a regression analysis to check if the ecology level is
 helpful in predicting the price of the house
 ;
  
@@ -88,11 +88,11 @@ Note: This compares the column product_type and Price_doc
 
 Methodology: using proc means to calculate the mean per type
 
-Limitations:this comparision does not consider other variables that 
-might have an effect on the price
+Limitations:this comparison does not consider other variables that 
+might influence the price
 
 Followup Steps:we can do a mean per year for each type to see if 
-there is a significant differnces per year
+there is a significant difference per year
 ;
  
 proc print 
@@ -127,10 +127,10 @@ Note: This compares the column cafe_count_500 and Price_doc
 
 Methodology: using proc corr to calculate the correlation
 
-Limitations: I did not check if there is any missing values for cafe_count_500
+Limitations: I did not check if there are any missing values for cafe_count_500
 
-Followup Steps: we can check the data to see if there is missing values which 
-might effect the correlation calculation
+Follow up Steps: we can check the data to see if there are missing values which 
+might affect the correlation calculation
 ;
 
 proc corr 
