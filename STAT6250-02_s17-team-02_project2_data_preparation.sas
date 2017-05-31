@@ -258,7 +258,6 @@ proc format;
     ;
 run;
 
-
 ******************************************************************************;
 * 
 build analytic dataset with the least number of columns
@@ -266,83 +265,78 @@ and minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files
 ;
 ******************************************************************************;
+
 data housing_analytic_file;
+    retain
+        timestamp
+        product_type
+	ecology
+	cafe_count_500
+	price_doc
+	;
+    keep
+        timestamp
+        product_type
+	ecology
+	cafe_count_500
+	price_doc
+	;
+    set Housing_concat
+    ;
+ run;
 
-        retain
-
-	       timestamp
-
-	       product_type
-
-	       ecology
-
-	       cafe_count_500
-         
-         price_doc
-
-	       ;
-	keep
-               timestamp
-
-               product_type
-
-               ecology
-
-               cafe_count_500
-               
-               price_doc
-
-               ;
-	set Housing_concat
-       ;
-  run;
-
-
-
-
+******************************************************************************;
+*
+using data step after proc means to remove unnecessary numbers from the output
+;
+******************************************************************************;
 
 proc means 
-   data = housing_analytic_file  nway noprint mean;
+    data = housing_analytic_file  nway noprint mean;
         var
-           price_doc
-           ;
-       class
-           ecology
-           ;
-  output out = mean_of_price_by_ecology_level
-  mean=Mean_Price
-          ;
+            price_doc
+        ;
+        class
+	    ecology
+        ;
+    output out = mean_of_price_by_ecology_level
+    mean=Mean_Price
+    ;
 run;
-
 
 data mean_of_price_by_ecology_level;
-   set 
-       mean_of_price_by_ecology_level;
-   drop
-       _TYPE_ _FREQ_
-   ;
+    set 
+        mean_of_price_by_ecology_level
+	;
+    drop
+        _TYPE_ _FREQ_
+       ;
 run;
  
- 
- proc means 
-    data = housing_analytic_file nway noprint ;
-      var
-          price_doc 
-          ;
-      class
-          Product_type
-          ;
-     output out = mean_of_price_by_type
-     mean=Mean_Price
-         ;
-run;
+******************************************************************************;
+*
+using data step after proc means to remove unnecessary numbers from the output
+;
+******************************************************************************;
 
+proc means 
+    data = housing_analytic_file nway noprint ;
+        var
+            price_doc 
+        ;
+        class
+            Product_type
+        ;
+    output out = mean_of_price_by_type
+    mean=Mean_Price
+    ;
+run;
 
 data mean_of_price_by_type ;
     set 
-       mean_of_price_by_type ;
-    
+        mean_of_price_by_type
+	;
     drop
-       _TYPE_ _FREQ_;
+        _TYPE_ _FREQ_
+	;
 run;
-
