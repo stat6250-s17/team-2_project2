@@ -65,6 +65,16 @@ area of each property (from 2015)
 
 --
 
+*Create bins for metro_min_walk column to use for data analysis;
+proc format;
+    value $metro_min_walk_bins
+        low-<10="Close to Metro Area"
+        10-<40="Near Metro Area"
+        40-<70="Moderately Near to Metro Area"
+        70.00-high="Far from Metro Area"
+    ;
+run;
+
 * setup environmental parameters;
 %let inputDataset1URL =
 https://github.com/stat6250/team-2_project2/blob/master/Data/macro_2014-2015.xlsx?raw=true
@@ -248,15 +258,6 @@ data housing_and_macro_edited;
 	set housing_and_macro;
 run;
 
-*Create bins for metro_min_walk column to use for data analysis;
-proc format;
-    value $metro_min_walk_bins
-        low-<10="Close to Metro Area"
-        10-<40="Near Metro Area"
-        40-<70="Moderately Near to Metro Area"
-        70.00-high="Far from Metro Area"
-    ;
-run;
 
 ******************************************************************************;
 * 
