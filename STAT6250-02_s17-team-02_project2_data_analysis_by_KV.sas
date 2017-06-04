@@ -29,11 +29,11 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-'Research Question: Has the price of the house kept increasing or decreasing from 2010 to 2016 and at what rate?'
+'Research Question: Has the price of the house kept increasing or decreasing from 2014 to mid 2015 and at what rate?'
 ;
 
 title2
-'Rationale: This should help the investors to see how the housing market behave from 2010 to 2016.'
+'Rationale: This should help the investors understand how the housing market behave from 2014 to mid 2015.'
 ;
 
 footnote1
@@ -41,17 +41,20 @@ footnote1
 ;
 
 footnote2
-'We can we the consistent increase from Janaury 2014 until March 2015, then the housing prices started to decrease.'
+'We can see the consistent increase from Janaury 2014 until March 2015, then the housing prices started to decrease after that.'
+;
+
+footnote3
+'Also we can see that there were more number of houses sold in 2014 than in the 2015. This implies that in 2015 the house price is driven up by a small volume unlike in 2014.'
 ;
 
 *
-Note: This would involve combining housing data from 2011-2015 and taking the 
-average of housing price by monthly or yearly.
+Note: This would involve combining housing data from 2014-2015 and taking the 
+average of housing price by monthly.
 
-Methodology: Combining Housing_Data_2011 with Housing_Data_2012 to Housing_Data_2015.
+Methodology: Combining Housing_Data_2014 with Housing_Data_2015.
 Use proc sort to create a temporary sorted table in descending by
-Housing_Data_2011_2015 and then proc print to display the first five
-rows of the sorted dataset.
+Housing_Data_2014_2015.
 
 Limitations: This methodology does not account for schools with missing data,
 nor does it attempt to validate data in any way, like filtering for percentages
@@ -59,7 +62,8 @@ between 0 and 1.
 
 Followup Steps: More carefully clean values in order to filter out any possible
 illegal values, and better handle missing data, e.g., by using a previous year's
-data or a rolling average of previous years' data as a proxy.
+data or a rolling average of previous years' data as a proxy. Present data with
+visualization instead of table
 ;
 
 
@@ -78,11 +82,11 @@ footnote;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 title1
-'Research Question: What is the relationship between housing price and economics indicators such as cpi, salary growth, income per capita, etc?'
+'Research Question: What is the relationship between housing price and economics indicators such as cpi, salary growth, income per capita and labor_force?'
 ;
 
 title2
-'Rationale: This should help the investors understand the picture and the relaionship between economics indicators and housing price.'
+'Rationale: This should help the investors understand the big picture which is the relaionship between economics indicators and housing price.'
 ;
 
 footnote1
@@ -90,25 +94,23 @@ footnote1
 ;
 
 footnote2
-'We don't see any increase for salary grwoth and labor force. Salar growth actually went down while labor force approximately going side way.'
+'We do not see any increase for salary grwoth and labor force. Salar growth actually went down while labor force approximately going side way.'
 ;
 
 *
 Note: This would involve merging two data sets one from macroeconomics data set
 and housing data set then we can make a table or a graph to see the relationship.
 
-Methodology: Combining Housing_Data_2011 with Housing_Data_2012 to Housing_Data_2015.
-Use proc sort to create a temporary sorted table in descending by
-Housing_Data_2011_2015 and then se proc means to compute average housing price and 
-GDP by month or yearly. Then use proc sort to sort the result by year and look at GDP
-and housing price side by side in a table.
+Methodology: Combining Housing_Data_2014 with Housing_Data_2015.
+Use proc means to compute average housing price and 
+cpi, income_per_capital, salary_growth, and labor_force by month or yearly. 
 
 Limitations: This methodology solely relies on just looking at the result in the
 table, which could be too coarse a method to find actual association between the
 variables.
 
-Followup Steps: A possible follow-up to this approach could use an inferential
-statistical technique like linear regression and add some graph.
+Followup Steps: A possible follow-up to this approach would be to use an inferential
+statistical technique like linear regression and add some graphs.
 ;
 
 proc means data=housing_and_macro_edited;
@@ -133,17 +135,21 @@ title2
 ;
 
 footnote1
-'As expected houses close to metro area are more expensive which is about 25% more expensive.'
+'As expected houses that are close to metro area are more expensive which is about 25% more expensive than the ones that are further away from metro area.'
 ;
 
 footnote2
-'Majority of the houses are near metro area and the average price is about 7,699,464 Ruble.'
+'Majority of the houses that are near metro area has the average price is about 7,699,464 Ruble.'
+;
+
+footnote3
+'There's no big price difference in the houses that are far or very far from the metro area.'
 ;
 
 *
 Note: This would involve making table to show the housing price in different areas.
 
-Methodology:  Combining Housing_Data_2011 with Housing_Data_2012 to Housing_Data_2015.
+Methodology:  Combining Housing_Data_2014 with Housing_Data_2015.
 Use proc sort to create a temporary sorted table in descending by
 Housing_Data_2011_2015 and then use Proc mean to calculate the average price in each
 metro area and compare them.
@@ -155,7 +161,8 @@ outside of admissable values.
 Followup Steps: More carefully clean the values of variables so that the
 statistics computed do not include any possible illegal values, and better
 handle missing data, e.g., by using a previous year's data or a rolling average
-of previous years' data as a proxy.
+of previous years' data as a proxy. We should also add another dimension by
+looking at this data across time. 
 ;
 
 proc means mean data=housing_concat;
