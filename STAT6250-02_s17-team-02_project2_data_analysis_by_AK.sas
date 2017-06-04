@@ -57,8 +57,8 @@ footnote2
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters.
 
-Methodology: When combining Housing_Data_2014_raw_sorted with Housing_Data_2015_
-raw sorted using proc sql, union and use aggregated function average to compute 
+Methodology: When combining Housing_Data_2014_raw_sorted & Housing_Data_2015_raw
+sorted using proc sql, union and use aggregated function average to compute 
 the average sale price per total area in square meters for each district. Use 
 label to display the data in user friendly format. Reuslt is restricted to 5 records 
 having highest Average House Price per square meter.
@@ -149,8 +149,8 @@ footnote2
 Note: Average House Price per square meter is calculated as sale price per total 
 area in square meters.
 
-Methodology: When combining Housing_Data_2014_raw_sorted with Housing_Data_2015_
-raw sorted using proc sql, union and use aggregated function average to compute 
+Methodology: When combining Housing_Data_2014_raw_sorted & Housing_Data_2015_raw
+sorted using proc sql, union and use aggregated function average to compute 
 the average sale price per total area in square meters for each district. Use 
 label to display the data in user friendly format. Reuslt is restricted to 5 records 
 having lowest Average House Price per square meter.
