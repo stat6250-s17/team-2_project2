@@ -68,10 +68,10 @@ area of each property (from 2015)
 *Create bins for metro_min_walk column to use for data analysis;
 proc format;
     value $metro_min_walk_bins
-        low-<10="Close to Metro Area"
-        10-<40="Near Metro Area"
-        40-<70="Moderately Near to Metro Area"
-        70.00-high="Far from Metro Area"
+       low-<10="Close to Metro Area (10 minutes or less)"
+        10-<40="Near Metro Area (Between 10 and 40 minutes)"
+        40-<70="Far from Metro Area (Between 40 and 70 minutes)"
+        70.00-high="Very far from Metro Area (70 minutes or higher)"
     ;
 run;
 
