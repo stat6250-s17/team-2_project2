@@ -143,7 +143,7 @@ footnote2
 ;
 
 footnote3
-'There's no big price difference in the houses that are far or very far from the metro area.'
+'There is no big price difference in the houses that are far or very far from the metro area.'
 ;
 
 *
