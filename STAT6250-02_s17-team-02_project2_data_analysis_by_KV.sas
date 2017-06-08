@@ -1,28 +1,23 @@
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
-*******************************************************************************;
-
+*******************************************************************************; 
 *
 This file uses the following analytic dataset to address several research
-questions regarding Russian housing market
-
-Dataset Name: housing_data_analytic_file created in external file
+questions regarding the prices for housing
+Dataset Name: housing_analytic_file created in external file
 STAT6250-02_s17-team-2_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
-
 See included file for dataset properties
 ;
-
+ 
 * environmental setup;
-
+ 
 * set relative file import path to current directory (using standard SAS trick);
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
-
-
+  
 * load external file that generates analytic dataset cde_2014_analytic_file;
-%include '.\STAT6250-02_s17-team-02_project2_data_preparation.sas';
-
+%include '.\STAT6250-02_s17-team-2_project2_data_preparation.sas';
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
@@ -37,7 +32,7 @@ title2
 ;
 
 footnote1
-'From Janaury 2014 to June 2015, the housing price in Russia has increased from 7,002,025 Ruble to 8,062,025 Ruble. '
+'From Janaury 2014 to June 2015, the housing price in Russia has increased from 7,002,025 Ruble to 8,062,025 Ruble.'
 ;
 
 footnote2
@@ -61,8 +56,8 @@ nor does it attempt to validate data in any way, like filtering for percentages
 between 0 and 1.
 
 Followup Steps: More carefully clean values in order to filter out any possible
-illegal values, and better handle missing data, e.g., by using a previous year's
-data or a rolling average of previous years' data as a proxy. Present data with
+illegal values, and better handle missing data, e.g., by using a previous year
+data or a rolling average of previous years data as a proxy. Present data with
 visualization instead of table
 ;
 
@@ -82,7 +77,7 @@ footnote;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 title1
-'Research Question: What is the relationship between housing price and economics indicators such as cpi, salary growth, income per capita and labor_force?'
+'Research Question: What is the relationship between housing price and economics indicators such as cpi, salary growth, income per capita and labor force?'
 ;
 
 title2
@@ -160,8 +155,8 @@ outside of admissable values.
 
 Followup Steps: More carefully clean the values of variables so that the
 statistics computed do not include any possible illegal values, and better
-handle missing data, e.g., by using a previous year's data or a rolling average
-of previous years' data as a proxy. We should also add another dimension by
+handle missing data, e.g., by using a previous year data or a rolling average
+of previous years data as a proxy. We should also add another dimension by
 looking at this data across time. 
 ;
 
