@@ -263,3 +263,95 @@ run;
 
 title;
 footnote;
+
+
+*******************************************************************************;
+* Research Question Analysis Starting Point;
+*******************************************************************************;
+
+title1
+'Research Question: Does GDP per quarter correlated with the Average House Price per square meter between AY2014 and AY2015?'
+;
+
+title2
+'Rationale: This should help identify the correlation between the GDP per quarter correlated with the Average House Price per square meter.'
+;
+
+title4
+'Correlation Matrix of GDP per quarter and Average House Price per square meter".'
+;
+
+footnote1
+'GDP per quarter has vary weak positive correlation with Average House Price per square meter during AY2014 and AY2015.'
+;
+
+
+footnote2
+'As there are only six value of GDP per quarter during AY2014 and AY2015, further investigation should be performed on entire dataset to find the overall correaltion.'
+;
+
+*
+Note: Average House Price per square meter is calculated as sale price per total 
+area in square meters per quarter.
+
+Methodology: Using proc corr procedure correlation matrix is generated between .
+GDP per quarter and Average House Price per square meter
+
+Limitations: This methodology does not account for quarter doesn't match between Macro 
+and Housing Data Set.
+
+Follow-up Steps: We need gdp value of each month or each day to identify correelation 
+ between GDP and Average House Price per square meter.
+;
+
+proc corr
+	nosimple 
+	data=housing_price_avg_and_gdp outp=corr
+	; 
+ 	var avg_price_sqm avg_gdp
+	;
+run;
+
+title;
+footnote;
+
+
+
+title1
+'Scatterplot with Regression Line'
+;
+
+
+footnote1
+'Regression lines shows that increase in GDP has increase the Average House Price per square meter'
+;
+
+footnote2
+'As there are only six value of GDP per quarter during AY2014 and AY2015, we need more data points by increasing the time period.'
+;
+
+footnote3
+'Average House Price per square meter is calculated for each quarter because GDP has quaterly data only'
+;
+
+
+proc sgplot 
+	data = housing_price_avg_and_gdp
+	;
+	xaxis label = "Quarterly Average House Price per square meter"
+	;
+	yaxis label = "GDP per Quarter"
+	;
+	scatter 
+		x = avg_price_sqm y = avg_gdp
+	;
+	loess 
+		x = avg_price_sqm y = avg_gdp/nomarkers
+	;
+	reg 
+		x = avg_price_sqm y = avg_gdp
+	;
+run;
+
+title;
+footnote;

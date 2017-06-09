@@ -215,10 +215,41 @@ create table Housing_Macro_Combined as
 ;
 run;
 
+
 *Combine Housing_Data_2014 and Housing_Data_2015 data vertically;
 Data housing_concat;
 	set Housing_Data_2014_raw_sorted Housing_Data_2015_raw_sorted;
 run;
+
+*Take average of housing price by quarter and combined with quaterly gdp from macro dataset;
+proc sql;
+create table housing_price_avg_and_gdp as
+	select housing_price_avg_by_quarter.*,
+		   gdp_by_quarter.avg_gdp
+	from
+		(select a.quarter , 
+				a.quarter_id ,
+			   avg(a.price_doc/a.full_sq) as avg_price_sqm
+		from
+			(select put (timestamp,yyqr.)  as quarter, 
+					put (timestamp,yyqn3.)  as quarter_id, 
+			   		price_doc as price_doc,
+					full_sq as full_sq
+        	from housing_concat) a
+        group by a.quarter,a.quarter_id) housing_price_avg_by_quarter,
+		(select b.quarter , 
+				b.quarter_id ,
+			   avg(b.gdp_quart) as avg_gdp
+		from
+			(select put (timestamp,yyqr.)  as quarter, 
+					put (timestamp,yyqn3.)  as quarter_id, 
+					gdp_quart as gdp_quart
+        	from macro_raw_sorted) b
+        group by b.quarter,b.quarter_id) gdp_by_quarter
+		where housing_price_avg_by_quarter.quarter = gdp_by_quarter.quarter
+		order by housing_price_avg_by_quarter.quarter_id
+    ;
+quit;
 
 
 *Take average of housing price by day of the month;
