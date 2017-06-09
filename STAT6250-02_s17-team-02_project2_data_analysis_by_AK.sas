@@ -335,12 +335,18 @@ footnote3
 ;
 
 
-proc sgplot data = housing_price_avg_and_gdp;
-xaxis label = "Quarterly Average House Price per square meter";
-yaxis label = "GDP";
-scatter x = avg_price_sqm y = avg_gdp;
-loess x = avg_price_sqm y = avg_gdp/nomarkers;
-reg x = avg_price_sqm y = avg_gdp;
+proc sgplot 
+	data = housing_price_avg_and_gdp;
+	xaxis 
+		label = "Quarterly Average House Price per square meter";
+	yaxis 
+		label = "GDP per Quarter";
+	scatter 
+		x = avg_price_sqm y = avg_gdp;
+	loess 
+		x = avg_price_sqm y = avg_gdp/nomarkers;
+	reg 
+		x = avg_price_sqm y = avg_gdp;
 run;
 
 title;
