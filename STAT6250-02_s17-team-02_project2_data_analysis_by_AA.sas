@@ -17,7 +17,7 @@ See included file for dataset properties
 X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
   
 * load external file that generates analytic dataset cde_2014_analytic_file;
-%include '.\STAT6250-02_s17-team-2_project2_data_preparation.sas';
+%include '.\STAT6250-02_s17-team-02_project2_data_preparation.sas';
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
