@@ -107,15 +107,15 @@ footnote;
 *******************************************************************************;
 
 title1 
-'Research Question:what is the average price for owner-occupied purchase?'
+'Research Question:Is there a correlation between the price and the number of cafes within 500 meters?'
 ;
 
 title2 
-'Rationale:to show the mean price for owner-occupied and investment purchase'
+'Rationale: to determine if there is a correlation between the price and the number of cafe within 500 meters'
 ;
 
 footnote1 
-" From the table above the correlation between the number of cafe within 500 meters and the price is 0.11291   "
+" From the table above the correlation is 0.11291   "
 ;
 
 footnote2 
